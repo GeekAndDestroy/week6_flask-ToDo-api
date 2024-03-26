@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, render_template
 from app import app
 from fake_data.tasks import tasks_list
 
@@ -40,9 +40,7 @@ def create_task():
         'id': len(tasks_list) + 1,
         'title': title,
         'description': description,
-        'CreatedAt': '2024-03-25T15:21:35',
-        'dueDate': '2023-12-31T15:00:00',
-        'completed': True
+        'completed': False
     }
 
     tasks_list.append(new_task)
