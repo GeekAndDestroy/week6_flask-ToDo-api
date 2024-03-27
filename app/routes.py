@@ -1,6 +1,6 @@
 from flask import request, render_template
-from app import app
-from fake_data.tasks import tasks_list
+from app import app, db
+from .models import Task
 from datetime import datetime
 
 # Define a route
@@ -10,16 +10,21 @@ def index():
 
 @app.route('/tasks') # Show all tasks
 def get_tasks():
-    tasks = tasks_list
-    return tasks
+    select_stmt = db.select(Task)
+    search = request.args.get('search')
+    if search:
+        select_stmt = select_stmt.where(Task.completed.ilike(f"%{search}%"))
+    # get the posts from database
+    tasks = db.session.execute(select_stmt).scalars().all()
+    return [t.to_dict() for t in tasks]
 
 @app.route('/tasks/<int:task_id>') # Show task by ID
 def get_post(task_id):
-    tasks = tasks_list
-    for task in tasks:
-        if task['id'] == task_id:
-            return task
-    return {'error': f"Task with an ID of {task_id} does not exist"}, 404
+    task = db.session.get(Task, task_id)
+    if task:
+        return task.to_dict()
+    else:
+        return {'error': f"Task with an ID of {task_id} does not exist"}, 404
 
 @app.route('/tasks', methods=['POST']) # Create new task
 def create_task():
@@ -37,15 +42,8 @@ def create_task():
     title = data.get('title')
     description = data.get('description')
 
-    new_task = {
-        'id': len(tasks_list) + 1,
-        'title': title,
-        'description': description,
-        'completed': False,
-        'created_At': datetime.utcnow,
-        'dueDate': ""
-    }
+    new_task =  Task(title=title, description=description)
 
-    tasks_list.append(new_task)
+    # tasks_list.append(new_task)
     
-    return new_task, 201
+    return new_task.to_dict(), 201
