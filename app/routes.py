@@ -1,6 +1,7 @@
 from flask import request, render_template
 from app import app
 from fake_data.tasks import tasks_list
+from datetime import datetime
 
 # Define a route
 @app.route("/")
@@ -40,7 +41,9 @@ def create_task():
         'id': len(tasks_list) + 1,
         'title': title,
         'description': description,
-        'completed': False
+        'completed': False,
+        'created_At': datetime.utcnow,
+        'dueDate': ""
     }
 
     tasks_list.append(new_task)
