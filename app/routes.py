@@ -26,7 +26,7 @@ def get_complete():
     tasks = db.session.execute(select_stmt.where(Task.completed == True)).scalars().all()
     return [t.to_dict() for t in tasks]
 
-@app.route('/tasks/incomplete') # Show all completed tasks
+@app.route('/tasks/incomplete') # Show all incomplete tasks
 def get_incomplete():
     select_stmt = db.select(Task)
     tasks = db.session.execute(select_stmt.where(Task.completed == False)).scalars().all()
