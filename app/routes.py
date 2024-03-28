@@ -13,7 +13,8 @@ def get_tasks():
     select_stmt = db.select(Task)
     search = request.args.get('search')
     if search:
-        select_stmt = select_stmt.where(Task.completed.ilike(f"%{search}%"))
+        # select_stmt = select_stmt.where(Task.completed.like(f"%{search}%"))
+        select_stmt = select_stmt.where(Task.completed == (search.lower()))
     # get the posts from database
     tasks = db.session.execute(select_stmt).scalars().all()
     return [t.to_dict() for t in tasks]
