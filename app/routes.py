@@ -13,10 +13,23 @@ def get_tasks():
     select_stmt = db.select(Task)
     search = request.args.get('search')
     if search:
-        # select_stmt = select_stmt.where(Task.completed.like(f"%{search}%"))
-        select_stmt = select_stmt.where(Task.completed == (search.lower()))
+        # select_stmt = select_stmt.where(Post.title.like(f"%{search}%"))
+        select_stmt = select_stmt.where(Task.completed == search.lower())
     # get the posts from database
     tasks = db.session.execute(select_stmt).scalars().all()
+    return [t.to_dict() for t in tasks]
+
+
+@app.route('/tasks/complete') # Show all completed tasks
+def get_complete():
+    select_stmt = db.select(Task)
+    tasks = db.session.execute(select_stmt.where(Task.completed == True)).scalars().all()
+    return [t.to_dict() for t in tasks]
+
+@app.route('/tasks/incomplete') # Show all completed tasks
+def get_incomplete():
+    select_stmt = db.select(Task)
+    tasks = db.session.execute(select_stmt.where(Task.completed == False)).scalars().all()
     return [t.to_dict() for t in tasks]
 
 @app.route('/tasks/<int:task_id>') # Show task by ID
