@@ -36,7 +36,7 @@ class Task(db.Model):
             "createdAt": self.created_at,
             "dueDate": self.due_date,
             "completed": self.completed,
-            "author": self.author
+            # "author": self.author
         }
     
     def update(self, **kwargs):
@@ -87,7 +87,7 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "dateCreated": self.date_created,
-            "tasks": self.tasks,
+            # "tasks": self.tasks,
         }
     
     def get_token(self):
