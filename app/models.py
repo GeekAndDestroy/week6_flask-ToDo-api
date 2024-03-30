@@ -37,7 +37,23 @@ class Task(db.Model):
             "createdAt": self.created_at,
             "dueDate": self.due_date,
             "completed": self.completed,
-            # "author": jsonpickle.encode(self.author)
+            "author": {
+                "userId": self.author.user_id,
+                "username": self.author.username,
+                "email": self.author.email,
+                "dateCreated": self.author.date_created,
+            }
+        }
+    
+
+    def to_json(self):
+        return {
+            "taskId": self.task_id,
+            "title": self.title,
+            "description": self.description,
+            "createdAt": self.created_at,
+            "dueDate": self.due_date,
+            "completed": self.completed
         }
     
     def update(self, **kwargs):
@@ -88,7 +104,7 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "dateCreated": self.date_created,
-            # "tasks": self.tasks,
+            "tasks": [task.to_json() for task in self.tasks]
         }
     
     def get_token(self):
