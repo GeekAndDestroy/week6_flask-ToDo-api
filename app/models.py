@@ -37,7 +37,7 @@ class Task(db.Model):
             "createdAt": self.created_at,
             "dueDate": self.due_date,
             "completed": self.completed,
-            "author": jsonpickle.encode(self.author)
+            # "author": jsonpickle.encode(self.author)
         }
     
     def update(self, **kwargs):
