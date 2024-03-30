@@ -39,7 +39,7 @@ class Task(db.Model):
         }
     
     def update(self, **kwargs):
-        allowed_fields = {'title', 'description'}
+        allowed_fields = {'title', 'description', 'completed', 'due_date'}
 
         for key, value in kwargs.items():
             if key in allowed_fields:
