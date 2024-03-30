@@ -2,6 +2,7 @@ import secrets
 from app import db
 from datetime import datetime, timezone, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
+import jsonpickle 
 
 class Task(db.Model):
     task_id = db.Column(db.Integer, primary_key=True)
@@ -36,7 +37,7 @@ class Task(db.Model):
             "createdAt": self.created_at,
             "dueDate": self.due_date,
             "completed": self.completed,
-            # "author": self.author
+            "author": jsonpickle.encode(self.author)
         }
     
     def update(self, **kwargs):
