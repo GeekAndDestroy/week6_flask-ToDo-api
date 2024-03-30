@@ -60,6 +60,7 @@ class User(db.Model):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_password(kwargs.get('password', ''))
+        self.get_token()
 
     def __repr__(self):
         return f"<User {self.user_id}|{self.username}>"

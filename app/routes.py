@@ -6,7 +6,7 @@ from .auth import basic_auth, token_auth
 # Define a route
 @app.route("/") #Index/documentation
 def index():
-    return render_template('/index.html')
+    return render_template('index.html')
 
 
 
