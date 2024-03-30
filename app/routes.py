@@ -85,7 +85,7 @@ def edit_user(user_id):
 
 
 
-@app.route('/users/<int:user_id>', methods=['DELETE'])
+@app.route('/users/<int:user_id>', methods=['DELETE']) # Delete user
 @token_auth.login_required
 def delete_user(user_id):
     # based on the post_id parameter check to see Post exists
@@ -164,6 +164,24 @@ def get_my_tasks():
     current_user = token_auth.current_user()
     tasks = db.session.execute(db.select(Task).where(Task.author == current_user)).scalars().all()
     return [t.to_dict() for t in tasks]
+
+
+@app.route('/me/complete') # Show logged in user's completed tasks
+@token_auth.login_required 
+def get_my_completed_tasks():
+    current_user = token_auth.current_user()
+    tasks = db.session.execute(db.select(Task).where(Task.author == current_user, Task.completed == True)).scalars().all()
+    return [t.to_dict() for t in tasks]
+
+
+@app.route('/me/incomplete') # Show logged in user's completed tasks
+@token_auth.login_required 
+def get_my_incomplete_tasks():
+    current_user = token_auth.current_user()
+    tasks = db.session.execute(db.select(Task).where(Task.author == current_user, Task.completed == False)).scalars().all()
+    return [t.to_dict() for t in tasks]
+
+
 
 
 

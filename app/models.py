@@ -99,7 +99,7 @@ class User(db.Model):
         return {"token": self.token, "tokenExpiration": self.token_expiration}
     
     def update(self, **kwargs):
-        allowed_fields = {'username', 'email',}
+        allowed_fields = {'username', 'email'}
 
         for key, value in kwargs.items():
             if key in allowed_fields:

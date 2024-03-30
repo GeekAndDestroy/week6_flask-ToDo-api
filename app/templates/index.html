@@ -23,37 +23,151 @@
         </div>
       </div>
       <div class="row">
+
+
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-                <span class="badge text-bg-success">GET</span> /posts  
+                <span class="badge text-bg-success">GET</span> /tasks  
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Authentication: <code>None</code></li>
                 <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>Get all tasks from the task table in a list of dictionaries.</code></li>
           </div>
         </div>
+
+
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+                <span class="badge text-bg-success">GET</span> /tasks/complete  
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>None</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>Get all COMPLETED tasks from the task table in a list of dictionaries.</code></li>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+                <span class="badge text-bg-success">GET</span> /tasks/incomplete  
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>None</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>Get all INCOMPLETE tasks from the task table in a list of dictionaries.</code></li>
+          </div>
+        </div>
+
+
         <div class="col-12">
             <div class="card">
               <div class="card-header">
-                  <span class="badge text-bg-success">GET</span> /posts/&lt;post_id&gt; 
+                  <span class="badge text-bg-success">GET</span> /tasks/&lt;task_id&gt; 
               </div>
               <ul class="list-group list-group-flush">
                   <li class="list-group-item">Authentication: <code>None</code></li>
                   <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                  <li class="list-group-item">Output: <code>Get a task in dictionary form based on the ID.</code></li>
             </div>
-          </div>
-      </div>
+        </div>
+    </div>
+
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-              <span class="badge text-bg-warning">POST</span> /posts  
+              <span class="badge text-bg-warning">POST</span> /tasks  
           </div>
           <ul class="list-group list-group-flush">
-              <li class="list-group-item">Authentication: <code>None</code></li>
-              <li class="list-group-item">Example Payload: <code>{ "title": "Example Title", "body": "Example Body" }</code></li>
+              <li class="list-group-item">Authentication: <code>Basic Auth, Bearer </code></li>
+              <li class="list-group-item">Example Payload: <code>{ "title": "Example Title", "description": "Example Description" }</code></li>
+              <li class="list-group-item">Output: <code> Create a new task with a title and description, returns the new task with a 201 status.</code></li>
         </div>
       </div>
+
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+              <span class="badge text-bg-info">PUT</span> /tasks/&lt;task_id&gt;   
+          </div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">Authentication: <code>Basic Auth, Bearer </code></li>
+              <li class="list-group-item">Example Payload: <code>{ "title": "Example Title", "description": "Example Description" }</code></li>
+              <li class="list-group-item">Output: <code>Update a task by id, task must be created by user trying to update.</code></li>
+        </div>
+      </div>
+
+
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+              <span class="badge text-bg-danger">DELETE</span> /tasks/&lt;task_id&gt;   
+          </div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">Authentication: <code>Basic Auth, Bearer </code></li>
+              <li class="list-group-item">Example Payload: <code>N/A</code></li>
+              <li class="list-group-item">Output: <code>Delete a task by id, task must be created by user trying to delete.</code></li>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="badge text-bg-success">GET</span> /me
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>Basic Auth, Bearer</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>return the authenticated user with only their tasks.</code></li>
+            </ul>
+        </div>
+      </div>
+
+
+
+      <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="badge text-bg-success">GET</span> /me/complete
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>Basic Auth, Bearer</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>return the authenticated user with only their COMPLETED tasks.</code></li>
+            </ul>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="badge text-bg-success">GET</span> /me/incomplete
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>Basic Auth, Bearer</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>return the authenticated user with only their INCOMPLETE tasks.</code></li>
+            </ul>
+        </div>
+      </div>
+
+
+
+
       <div class="col-12">
         <div class="card mb-3">
             <div class="card-header">
@@ -61,10 +175,69 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Authentication: <code>None</code></li>
-                <li class="list-group-item">Example Payload: <code>{ "firstName": "Michael", "lastName": "Jordan", "username": "jumpman23", "email": "mj@bulls.com", "password": "6rings!" }</code></li>
+                <li class="list-group-item">Example Payload: <code>{ "username": "user123", "email": "user123@example.com", "password": "securepassword123" }</code></li>
+                <li class="list-group-item">Output: <code>Create a new user with a username, email, and password.</code></li>
             </ul>
         </div>
-    </div>
+      </div>
+
+
+
+      <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="badge text-bg-success">GET</span> /users/&lt;task_id&gt;
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>None</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>Get a user by id in dictionary form or return a 404 status.</code></li>
+            </ul>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="badge text-bg-info">PUT</span> /users
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>Basic Auth, Bearer</code></li>
+                <li class="list-group-item">Example Payload: <code>{ "username": "user123", "email": "user123@example.com" }</code></li>
+                <li class="list-group-item">Output: <code>Update a user by id, user must be trying to update itself.</code></li>
+            </ul>            
+        </div>
+      </div>
+
+
+      <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="badge text-bg-info">DELETE</span> /users
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>Basic Auth, Bearer</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>Delete a user by id, user must be trying to delete itself.</code></li>
+            </ul>            
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="badge text-bg-success">GET</span> /token
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Authentication: <code>Basic Auth</code></li>
+                <li class="list-group-item">Example Payload: <code>N/A</code></li>
+                <li class="list-group-item">Output: <code>returns a token based on username and password.</code></li>
+            </ul>
+        </div>
+      </div>
       
     </div>
 
