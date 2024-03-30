@@ -37,12 +37,13 @@ class Task(db.Model):
             "createdAt": self.created_at,
             "dueDate": self.due_date,
             "completed": self.completed,
-            "author": {
-                "userId": self.author.user_id,
-                "username": self.author.username,
-                "email": self.author.email,
-                "dateCreated": self.author.date_created,
-            }
+            "author": self.author.to_json()
+            # "author": {
+            #     "userId": self.author.user_id,
+            #     "username": self.author.username,
+            #     "email": self.author.email,
+            #     "dateCreated": self.author.date_created,
+            # }
         }
     
 
@@ -104,7 +105,16 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "dateCreated": self.date_created,
+            # "tasks": [task.to_json() for task in self.tasks]
             "tasks": [task.to_json() for task in self.tasks]
+        }
+    
+
+    def to_json(self):
+        return {
+            "userId": self.user_id,
+            "username": self.username,
+            "email": self.email  
         }
     
     def get_token(self):
