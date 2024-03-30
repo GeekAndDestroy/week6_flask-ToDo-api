@@ -35,7 +35,8 @@ class Task(db.Model):
             "description": self.description,
             "createdAt": self.created_at,
             "dueDate": self.due_date,
-            "completed": self.completed
+            "completed": self.completed,
+            "author": self.author
         }
     
     def update(self, **kwargs):
